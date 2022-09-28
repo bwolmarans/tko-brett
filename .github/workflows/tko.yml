@@ -45,7 +45,7 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}   
         load: true
         
- - name: Get the New Scanner
+    - name: Get the New Scanner
       run: curl -LO "https://download.sysdig.com/scanning/bin/sysdig-cli-scanner/$(curl -L -s https://download.sysdig.com/scanning/sysdig-cli-scanner/latest_version.txt)/linux/amd64/sysdig-cli-scanner"
 
     - name: Make the New Scanner executable
