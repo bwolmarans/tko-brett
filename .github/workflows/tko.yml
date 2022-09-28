@@ -51,6 +51,7 @@ jobs:
       run: ./sysdig-cli-scanner --apiurl ${{ env.SYSDIG_URL }} ${{ env.APP_NAME }}:bld-${{ steps.date.outputs.date }}
 
     - name: Upload artifact
+      if: always()
       uses: actions/upload-artifact@v1
       with:
         name: surefire-reports
