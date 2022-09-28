@@ -47,7 +47,7 @@ jobs:
 
     - name: Scan Image with New Scanner
       env:
-        SECURE_API_TOKEN: ${{ secrets.SECURE_API_TOKEN }}
+        SECURE_API_TOKEN: ${{ secrets.TTT }}
       run: ./sysdig-cli-scanner --apiurl ${{ env.SYSDIG_URL }} ${{ env.APP_NAME }}:bld-${{ steps.date.outputs.date }}
 
     - name: re-tag
