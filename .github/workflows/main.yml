@@ -1,3 +1,8 @@
+env:
+  SYSDIG_URL: https://app.us4.sysdig.com/
+  APP_NAME: brett-tko
+  REGISTRY: ghcr.io
+  
 name: tko
 
 on:
@@ -5,10 +10,7 @@ on:
   push:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
-env:
-  SYSDIG_URL: https://app.us4.sysdig.com/
-  APP_NAME: brett-tko
-  REGISTRY: ghcr.io
+
 
 jobs:
   build:
