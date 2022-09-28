@@ -45,8 +45,15 @@ jobs:
     - name: Make the New Scanner executable
       run: chmod +x ./sysdig-cli-scanner
 
-
     - name: Scan Image with New Scanner
       env:
         SECURE_API_TOKEN: ${{ secrets.SECURE_API_TOKEN }}
       run: ./sysdig-cli-scanner --apiurl ${{ env.SYSDIG_URL }} ${{ env.APP_NAME }}:bld-${{ steps.date.outputs.date }}
+
+    - name: re-tag
+      run: docker tag ${{ env.APP_NAME }}:bld-${{ steps.date.outputs.date }} ${{ env.REGISTRY }}/bwolmarans/tko-brett/${{ env.APP_NAME }}:bld-${{ steps.date.outputs.date }}
+      
+    - name: push-finally
+      run: docker push ${{ env.REGISTRY }}/bwolmarans/tko-brett/${{ env.APP_NAME }}:bld-${{ steps.date.outputs.date }}
+      
+    
