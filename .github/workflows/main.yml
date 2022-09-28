@@ -3,7 +3,7 @@ env:
     REGISTRY_HOST: "ghcr.io"
     IMAGE_NAME: "brett-tko"
     IMAGE_TAG: "my-tag"
-    DOCKERFILE_CONTEXT: "github/"
+    
 name: Container build, scan and push
 on: [push, pull_request]
 
