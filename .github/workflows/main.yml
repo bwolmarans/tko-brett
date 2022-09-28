@@ -1,0 +1,39 @@
+env:
+    SYSDIG_SECURE_ENDPOINT: "https://app.us4.sysdig.com"
+    REGISTRY_HOST: "ghcr.io"
+    IMAGE_NAME: "brett-tko"
+    IMAGE_TAG: "my-tag"
+    DOCKERFILE_CONTEXT: "github/"
+name: Container build, scan and push
+on: [push, pull_request]
+
+jobs:
+  build-scan-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build and save
+      uses: docker/build-push-action@v3
+      with:
+        context: ${{ env.DOCKERFILE_CONTEXT }}
+        tags: ${{ env.REGISTRY_HOST }}/${{ secrets.REGISTRY_USER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        load: true
+
+    - name: Get the New Scanner
+      run: curl -LO "https://download.sysdig.com/scanning/bin/sysdig-cli-scanner/$(curl -L -s https://download.sysdig.com/scanning/sysdig-cli-scanner/latest_version.txt)/linux/amd64/sysdig-cli-scanner"
+
+    - name: Make the New Scanner executable
+      run: chmod +x ./sysdig-cli-scanner
+
+
+    - name: Scan Image with New Scanner
+      env:
+        SECURE_API_TOKEN: ${{ secrets.SYSDIG_API_TOKEN }}
+      run: ./sysdig-cli-scanner --apiurl ${{ env.SYSDIG_URL }} ${{ env.APP_NAME }}:bld-${{ steps.date.outputs.date }}
+
+
