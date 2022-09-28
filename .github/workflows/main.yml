@@ -1,7 +1,7 @@
 env:
-  SYSDIG_URL: https://app.us4.sysdig.com/
-  APP_NAME: brett-tko
-  REGISTRY: ghcr.io
+  SYSDIG_URL: "https://app.us4.sysdig.com/"
+  APP_NAME: "brett-tko"
+  REGISTRY: "ghcr.io"
   
 name: tko
 
