@@ -4,7 +4,7 @@ env:
     REGISTRY_HOST: "ghcr.io"
     IMAGE_NAME: "tko-brett"
     IMAGE_TAG: "my-tag"
-    DOCKERFILE_CONTEXT: "github/"
+    DOCKERFILE_CONTEXT: "."
 
 
 name: Container build, scan and push
