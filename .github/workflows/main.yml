@@ -1,4 +1,4 @@
-name: TKO container build, scan, and push
+name: tko
 
 on:
   workflow_dispatch:
