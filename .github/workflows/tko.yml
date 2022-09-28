@@ -50,6 +50,12 @@ jobs:
         SECURE_API_TOKEN: ${{ secrets.TTT }}
       run: ./sysdig-cli-scanner --apiurl ${{ env.SYSDIG_URL }} ${{ env.APP_NAME }}:bld-${{ steps.date.outputs.date }}
 
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: surefire-reports
+        path: /home/runner/work/tko-brett/tko-brett/scan-logs/**
+
     - name: re-tag
       run: docker tag ${{ env.APP_NAME }}:bld-${{ steps.date.outputs.date }} ${{ env.REGISTRY }}/bwolmarans/tko-brett/${{ env.APP_NAME }}:bld-${{ steps.date.outputs.date }}
     
